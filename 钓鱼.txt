@@ -1,0 +1,262 @@
+--身上要有足够的金买鱼竿、鱼饵、火折子，把背包留出50格左右空位，不然拣不到鱼。在帮会鱼塘李霖附近开始脚本。
+
+s_cmd.MoveTo(9852, 21250, 1115456)	--移动到李霖旁边
+s_cmd.InteractNpc(10426)		--和小豆丁对话
+s_cmd.OpenShop("帮会-钓鱼·火折子")	--打开商店
+s_cmd.BuyItem(5, 7992, 20)		--买20个火折子
+s_cmd.InteractNpc(9788)			--和李霖对话
+s_cmd.OpenShop("钓鱼·渔具")		--打开商店
+s_cmd.BuyItem(5, 7740, 1)		--买1个鱼竿
+s_cmd.BuyItem(5, 7843, 400)		--买400个鱼饵
+
+s_cmd.MoveTo(10286, 21454, 1115520)
+s_cmd.MoveTo(9966, 21990, 1115392)	--移动到鱼篓旁边
+
+s_cmd.Tag("钓鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentStamina < 3 or g_LocalPlayer.GetItemAmount(5, 7843) < 1, "烤鱼")	--如果精力小于3点或者鱼饵数量小于1个
+s_cmd.CheckExpr(s_util.GetBuff(11964), "放杆")		--如果有钓鱼buff
+s_cmd.InteractDoodad(6540)				--交互鱼篓
+s_cmd.Wait(1000)
+s_cmd.Tag("放杆")
+s_cmd.Fishing()
+s_cmd.Goto("钓鱼")
+
+s_cmd.Tag("烤鱼")
+s_cmd.MoveTo(9861, 20313, 1115072)	--移动到火堆
+
+----------------------------烤蓝鱼----------------------------
+s_cmd.Tag("三十斤九钱的青鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")				--如果体力小于10
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 7870) < 1, "三十斤九钱的青鱼结束")	--如果没有这种鱼
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤三十斤九钱的青鱼")			--如果5尺内有燃烧的篝火堆
+s_cmd.InteractDoodad(2435)								--交互篝火堆
+s_cmd.Tag("烤三十斤九钱的青鱼")
+s_cmd.UseItem(5, 7870)									--使用这种鱼
+s_cmd.Goto("三十斤九钱的青鱼")
+s_cmd.Tag("三十斤九钱的青鱼结束")
+
+s_cmd.Tag("二十斤一两的鲢鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 7871) < 1, "二十斤一两的鲢鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤二十斤一两的鲢鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤二十斤一两的鲢鱼")
+s_cmd.UseItem(5, 7871)
+s_cmd.Goto("二十斤一两的鲢鱼")
+s_cmd.Tag("二十斤一两的鲢鱼结束")
+
+s_cmd.Tag("二十八斤八两的鲈鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 7872) < 1, "二十八斤八两的鲈鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤二十八斤八两的鲈鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤二十八斤八两的鲈鱼")
+s_cmd.UseItem(5, 7872)
+s_cmd.Goto("二十八斤八两的鲈鱼")
+s_cmd.Tag("二十八斤八两的鲈鱼结束")
+
+s_cmd.Tag("六斤一两的鲤鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 7867) < 1, "六斤一两的鲤鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤六斤一两的鲤鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤六斤一两的鲤鱼")
+s_cmd.UseItem(5, 7867)
+s_cmd.Goto("六斤一两的鲤鱼")
+s_cmd.Tag("六斤一两的鲤鱼结束")
+
+s_cmd.Tag("四斤二两四钱的草鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 7868) < 1, "四斤二两四钱的草鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤四斤二两四钱的草鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤四斤二两四钱的草鱼")
+s_cmd.UseItem(5, 7868)
+s_cmd.Goto("四斤二两四钱的草鱼")
+s_cmd.Tag("四斤二两四钱的草鱼结束")
+
+s_cmd.Tag("四斤一两的鲫鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 7869) < 1, "四斤一两的鲫鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤四斤一两的鲫鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤四斤一两的鲫鱼")
+s_cmd.UseItem(5, 7869)
+s_cmd.Goto("四斤一两的鲫鱼")
+s_cmd.Tag("四斤一两的鲫鱼结束")
+
+----------------------------烤绿鱼----------------------------
+s_cmd.Tag("鲮鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8315) < 1, "鲮鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤鲮鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤鲮鱼")
+s_cmd.UseItem(5, 8315)
+s_cmd.Goto("鲮鱼")
+s_cmd.Tag("鲮鱼结束")
+
+s_cmd.Tag("鲚鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8318) < 1, "鲚鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤鲚鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤鲚鱼")
+s_cmd.UseItem(5, 8318)
+s_cmd.Goto("鲚鱼")
+s_cmd.Tag("鲚鱼结束")
+
+s_cmd.Tag("鳡鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8320) < 1, "鳡鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤鳡鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤鳡鱼")
+s_cmd.UseItem(5, 8320)
+s_cmd.Goto("鳡鱼")
+s_cmd.Tag("鳡鱼结束")
+
+s_cmd.Tag("鳟鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8322) < 1, "鳟鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤鳟鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤鳟鱼")
+s_cmd.UseItem(5, 8322)
+s_cmd.Goto("鳟鱼")
+s_cmd.Tag("鳟鱼结束")
+
+s_cmd.Tag("白鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8323) < 1, "白鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤白鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤白鱼")
+s_cmd.UseItem(5, 8323)
+s_cmd.Goto("白鱼")
+s_cmd.Tag("白鱼结束")
+
+s_cmd.Tag("花鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8324) < 1, "花鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤花鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤花鱼")
+s_cmd.UseItem(5, 8324)
+s_cmd.Goto("花鱼")
+s_cmd.Tag("花鱼结束")
+
+s_cmd.Tag("鲟鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8325) < 1, "鲟鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤鲟鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤鲟鱼")
+s_cmd.UseItem(5, 8325)
+s_cmd.Goto("鲟鱼")
+s_cmd.Tag("鲟鱼结束")
+
+s_cmd.Tag("大黄鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8326) < 1, "大黄鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤大黄鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤大黄鱼")
+s_cmd.UseItem(5, 8326)
+s_cmd.Goto("大黄鱼")
+s_cmd.Tag("大黄鱼结束")
+
+s_cmd.Tag("罗非鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8327) < 1, "罗非鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤罗非鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤罗非鱼")
+s_cmd.UseItem(5, 8327)
+s_cmd.Goto("罗非鱼")
+s_cmd.Tag("罗非鱼结束")
+
+s_cmd.Tag("带鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8328) < 1, "带鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤带鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤带鱼")
+s_cmd.UseItem(5, 8328)
+s_cmd.Goto("带鱼")
+s_cmd.Tag("带鱼结束")
+
+s_cmd.Tag("泥鳅")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8329) < 1, "泥鳅结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤泥鳅")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤泥鳅")
+s_cmd.UseItem(5, 8329)
+s_cmd.Goto("泥鳅")
+s_cmd.Tag("泥鳅结束")
+
+s_cmd.Tag("鳇鱼")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 10, "烤鱼结束")
+s_cmd.CheckExpr(g_LocalPlayer.GetItemAmount(5, 8331) < 1, "鳇鱼结束")
+s_cmd.CheckExpr(s_util.CheckDoodad(2436, 5), "烤鳇鱼")
+s_cmd.InteractDoodad(2435)
+s_cmd.Tag("烤鳇鱼")
+s_cmd.UseItem(5, 8331)
+s_cmd.Goto("鳇鱼")
+s_cmd.Tag("鳇鱼结束")
+
+s_cmd.Tag(烤鱼结束)
+s_cmd.MoveTo(9852, 21250, 1115456)	--移动到李霖旁边
+s_cmd.InteractNpc(9788)			--和李霖对话
+s_cmd.OpenShop("钓鱼·渔具")		--打开商店
+
+----------------------------卖杂物----------------------------
+s_cmd.SellItem(5, 7907)		--戏虎图·一
+s_cmd.SellItem(5, 7908)		--戏虎图·二
+s_cmd.SellItem(5, 7909)		--戏虎图·三
+s_cmd.SellItem(5, 7910)		--戏虎图·四
+s_cmd.SellItem(5, 7911)		--剑客行·残页
+--------------------------卖烤过的蓝鱼--------------------------
+s_cmd.SellItem(5, 25427)	--炭烤鲤鱼
+s_cmd.SellItem(5, 25428)	--炭烤草鱼
+s_cmd.SellItem(5, 25429)	--炭烤鲫鱼
+s_cmd.SellItem(5, 25431)	--炭烤鲢鱼
+s_cmd.SellItem(5, 25430)	--炭烤青鱼
+s_cmd.SellItem(5, 25432)	--炭烤鲈鱼
+--------------------------卖烤过的绿鱼--------------------------
+s_cmd.SellItem(5, 25415)	--炭烤鳇鱼
+s_cmd.SellItem(5, 25420)	--炭烤大黄鱼
+s_cmd.SellItem(5, 25425)	--炭烤鲮鱼
+s_cmd.SellItem(5, 25421)	--炭烤鲟鱼
+s_cmd.SellItem(5, 25417)	--炭烤泥鳅
+s_cmd.SellItem(5, 25416)	--炭烤鲚鱼
+s_cmd.SellItem(5, 25422)	--炭烤花鱼
+s_cmd.SellItem(5, 25418)	--炭烤带鱼
+s_cmd.SellItem(5, 25415)	--炭烤鳇鱼
+s_cmd.SellItem(5, 25423)	--炭烤白鱼
+s_cmd.SellItem(5, 25424)	--炭烤鳟鱼
+s_cmd.SellItem(5, 25426)	--炭烤鳡鱼
+s_cmd.SellItem(5, 25419)	--炭烤罗非鱼
+s_cmd.SellItem(5, 25425)	--炭烤鲮鱼
+----------------------------卖白鱼----------------------------
+s_cmd.SellItem(5, 7861)		--鲤鱼
+s_cmd.SellItem(5, 7862)		--草鱼
+s_cmd.SellItem(5, 7863)		--鲫鱼
+s_cmd.SellItem(5, 7864)		--青鱼
+s_cmd.SellItem(5, 7865)		--鲢鱼
+s_cmd.SellItem(5, 7866)		--鲈鱼
+----------------------------卖紫鱼----------------------------
+s_cmd.SellItem(5, 7873)		--北鲑
+s_cmd.SellItem(5, 7874)		--银白鱼
+s_cmd.SellItem(5, 7875)		--金丝鱼
+s_cmd.SellItem(5, 7876)		--胭脂鱼
+s_cmd.SellItem(5, 7877)		--香鱼
+s_cmd.SellItem(5, 7878)		--茴鱼
+
+
+
+
+--------删除挂件，如果有你需要的挂件，就把对应行注释掉--------
+s_cmd.DestroyItem(8, 2428)	--渔·临渊
+s_cmd.DestroyItem(8, 2429)	--渔·忘湖

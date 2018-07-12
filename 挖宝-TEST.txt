@@ -1,0 +1,27 @@
+--只适合在阴山大草原鸟之语挖宝，其他地区挖宝可能出现NPC错误卡脚本。
+--默认使用FightTable中第2个函数攻击，需要在FightTable中自行添加适合自己心法的攻击函数
+--FightTable更改后需要重新启动手残党m.exe才可正常载入，修改后务必重启
+--不要带跟宠或宝宝，不确定是否会影响NPC判定，如果挖宝点有其他玩家的跟宠也可能会出现错误卡脚本，需手动重新开始脚本
+--不支持藏宝洞判定
+--身上没酒遇到贪杯可能会出错，也可能还有其他错误，没有测试过全部的NPC
+
+s_cmd.Ride(0)								--下马
+s_cmd.Tag("开始挖宝")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 40, "挖宝结束")		--如果体力小于40点，结束
+s_cmd.FindTreasure()							--开启并寻找
+s_cmd.WaitFor(-1, g_LocalPlayer.nMoveState == MOVE_STATE.ON_STAND)	--等角色停止移动
+s_cmd.SitDown(s_util.GetItemCD(5, 6604, true) <= 0)			--等觅宝铲CD，顺便回气
+s_cmd.DigTreasure()							--挖
+s_cmd.WaitFor(8000, s_util.GetDoodad(1))				--等宝箱出现
+s_cmd.InteractDoodad(1)	                             --交互宝箱
+s_cmd.Tag("NPC")
+s_cmd.Wait(2000)                      --等NPC
+--非战斗状态时遍历6尺内有名字的NPC，敌对关系的直接用FightTable中第2个函数攻击，非敌对的跳转到“对话”标记。战斗状态继续攻击。直到没有NPC继续挖宝。
+tid=0 lvnpc=0 if not GetClientPlayer().bFightState then for i,v in ipairs(GetAllNpc()) do if  #v.szName>1 and IsEnemy(GetClientPlayer().dwID, v.dwID) and s_util.GetDistance(v, GetClientPlayer()) < 6 then tid=v.dwTemplateID end if #v.szName>1 and not IsEnemy(GetClientPlayer().dwID, v.dwID) and s_util.GetDistance(v, GetClientPlayer()) < 6 then tid=v.dwTemplateID lvnpc=1 end end if tid == 0 then s_cmd.Goto("开始挖宝") end if tid ~= 0 and lvnpc == 0 then s_cmd.FightEx(2, tid, 10) end if tid ~= 0 and lvnpc==1 then s_cmd.Goto("对话") end else s_cmd.FightEx(2, s_util.GetTarget(GetClientPlayer()).dwTemplateID, 10) end 
+s_cmd.Goto("NPC")
+s_cmd.Tag("对话")
+s_cmd.InteractNpc(tid, 10)  --交互绿名NPC
+--对话有选项1选择选项1，没有选项关闭对话框继续挖宝，防止点到别人的NPC
+if s_util.GetDialogItemByIndex(0) then s_cmd.SelectTalk(0) else DialoguePanel.Close(true) s_cmd.Goto("开始挖宝") end 
+s_cmd.Goto("NPC")
+s_cmd.Tag("挖宝结束")

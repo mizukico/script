@@ -1,0 +1,53 @@
+
+s_cmd.Tag("A")
+--没有泥鳅和蚯蚓就退出游戏，需要的话自己删掉下行开头注释“--”
+if s_util.GetItemCount(5,23615) == 0 and s_util.GetItemCount(5,23619) == 0 then ExitGame() end s_cmd.Next() 
+
+
+--有泥鳅就用泥鳅掉，没有就用蚯蚓
+if s_util.GetItemCount(5,23615) ~= 0 then WP = 13952  s_cmd.Next()elseif s_util.GetItemCount(5,23619) ~= 0 then WP = 13954 s_cmd.Next()end
+
+--喂鳄鱼有小杂鱼就用小杂鱼，没有就用鱼饼
+if s_util.GetItemCount(5,23616) ~= 0 then WP1 = 0  s_cmd.Next()else WP1 = 1 s_cmd.Next()end
+
+--有钓鱼buff继续，否则20尺内找鱼篓交互
+if s_util.GetBuff(8993) then s_cmd.Next() else s_cmd.InteractDoodadEx(5183,20) end
+
+--6尺内捉乌龟
+if s_util.GetNpc(43082,6)then s_cmd.InteractNpc(43082) else s_cmd.Next() end
+
+--对话鳄鱼
+if s_util.GetNpc(43083,6)then s_cmd.Goto("鳄鱼1")else s_cmd.Next() end
+if s_util.GetNpc(43088,6)then s_cmd.Goto("鳄鱼2")else s_cmd.Next() end
+if s_util.GetNpc(43089,6)then s_cmd.Goto("鳄鱼3")else s_cmd.Next() end
+
+
+--有上钩BUFF就收杆否则继续
+if s_util.GetBuff(9002) then  s_cmd.UseSkill(13955, true) else s_cmd.Next() end 
+--有钓鱼中buff或者上钩buff就继续，否则如果有钓鱼buff就放杆，否则继续。
+if s_util.GetBuff(9001) or s_util.GetBuff(9002) then s_cmd.Next() elseif  s_util.GetBuff(8993) then s_cmd.UseSkill(WP, true) else s_cmd.Next() end 
+s_cmd.Goto("A")
+
+
+--------------------------------鳄鱼对话tag-----------------------------------
+s_cmd.Tag("鳄鱼1")
+s_cmd.InteractNpc(43083)
+s_cmd.SelectTalk(WP1)
+if s_util.GetNpc(43082,6)then s_cmd.InteractNpc(43082) else s_cmd.Next() end
+s_cmd.Goto("A")
+
+s_cmd.Tag("鳄鱼2")
+s_cmd.InteractNpc(43088)
+s_cmd.SelectTalk(WP1)
+if s_util.GetNpc(43082,6)then s_cmd.InteractNpc(43082) else s_cmd.Next() end
+s_cmd.Goto("A")
+
+s_cmd.Tag("鳄鱼3")
+s_cmd.InteractNpc(43089)
+s_cmd.SelectTalk(WP1)
+if s_util.GetNpc(43082,6)then s_cmd.InteractNpc(43082) else s_cmd.Next() end
+s_cmd.Goto("A")
+------------------------------------------------------------------------------
+
+
+

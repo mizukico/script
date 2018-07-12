@@ -1,0 +1,372 @@
+--用群里原有的修改的，可以打肉了，其他也不知道啥，不知道，不知道，我什么都不知道！！！
+--任务设置：右边小齿轮-轻功设置-关闭轻功地面冲刺
+--如果中途出现问题或手动操作导致脚本失效，请回到茶馆大院重新运行。
+
+s_cmd.Tag("任务开始")
+s_cmd.SprintTo(47880, 65032, 1079168)		----走到茶馆小童常用点1
+s_cmd.CheckExpr(s_util.QuestIsAccept(14246), "接茶馆小童任务")	--判断1
+s_cmd.AcceptAllQuest(45009)	--接受赵云睿所有任务
+
+s_cmd.Tag("接茶馆小童任务")
+s_cmd.CheckExpr(s_util.QuestIsFinish(14246), "完成所有任务")	--判断2
+s_cmd.CheckExpr(s_util.QuestIsAccept(14253), "紫苏")	--紫苏
+s_cmd.CheckExpr(s_util.QuestIsAccept(14251), "里脊肉")	--里脊肉
+s_cmd.CheckExpr(s_util.QuestIsAccept(14669), "鲜花")	--鲜花
+s_cmd.CheckExpr(s_util.QuestIsAccept(14256),"织锦缎")	--织锦缎
+s_cmd.CheckExpr(s_util.QuestIsAccept(14249), "天青石")	--天青石
+s_cmd.CheckExpr(s_util.QuestIsAccept(14264), "查榜")	--查榜
+s_cmd.CheckExpr(s_util.QuestIsAccept(14668), "蜜蜂")	--蜜蜂
+s_cmd.CheckExpr(s_util.QuestIsAccept(14262), "小混混")	--小混混
+s_cmd.CheckExpr(s_util.QuestIsAccept(14265), "诗")	--对诗
+s_cmd.CheckExpr(s_util.QuestIsAccept(14786), "棋")	--下棋
+s_cmd.CheckExpr(s_util.QuestIsAccept(14667), "柴")	--取柴
+s_cmd.CheckExpr(s_util.QuestIsAccept(14270), "猫")	--吉飞飞
+s_cmd.CheckExpr(s_util.QuestIsAccept(14268), "流民")	--安置流民
+s_cmd.CheckExpr(s_util.QuestIsAccept(14254), "白术")	--白术
+s_cmd.CheckExpr(s_util.QuestIsAccept(14250), "烟雨")	--烟雨石
+s_cmd.CheckExpr(s_util.QuestIsAccept(14257), "古香")	--古香缎
+s_cmd.CheckExpr(s_util.QuestIsAccept(14252), "五花肉")	--古香缎
+s_cmd.CheckExpr(s_util.QuestIsAccept(14671), "打水")	--古香缎
+s_cmd.CheckExpr(s_util.QuestIsAccept(14670), "肉块")	--动物肉块
+
+s_cmd.AcceptAllQuest(45015)	--接受茶馆小童所有任务
+s_cmd.Goto("接茶馆小童任务")
+
+-------------------------------------------------------------------
+
+
+s_cmd.Tag("完成所有任务")
+s_cmd.SprintTo(47880, 65032, 1079168)		--走到茶馆小童常用点1
+s_cmd.FinishQuest(45009,14246)	--完成茶馆任务
+s_cmd.Goto("完成所有任务")
+
+
+-------------------------------------------------------------------
+s_cmd.Tag("紫苏")
+s_cmd.SprintTo(46124, 64553, 1079104)		
+s_cmd.SprintTo(46140, 64232, 1079168)		
+s_cmd.InteractNpc(46395)	
+s_cmd.SelectTalk(0)	
+s_cmd.SprintTo(46124, 64553, 1079104)		
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14253)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("里脊肉")
+s_cmd.SprintTo(45735, 65299, 1079168)		
+s_cmd.InteractNpc(46426)	
+s_cmd.SelectTalk(0)	
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14251)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("鲜花")
+s_cmd.SprintTo(50077, 64984, 1078144)		
+s_cmd.SprintTo(52156, 70746, 1079232)		
+s_cmd.Tag("鲜花循环")
+s_cmd.InteractDoodad(5476,6)	
+s_cmd.CheckExpr(s_util.QuestIsFinish(14669), "鲜花完成")	
+s_cmd.Goto("鲜花循环")
+s_cmd.Tag("鲜花完成")
+s_cmd.SprintTo(52156, 70746, 1079232)		
+s_cmd.SprintTo(50077, 64984, 1078144)	
+s_cmd.SprintTo(47880, 65032, 1079168)	
+s_cmd.FinishQuest(45015,14669)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("织锦缎")
+s_cmd.SprintTo(46124, 64553, 1079104)		
+s_cmd.SprintTo(46140, 64232, 1079168)		
+s_cmd.InteractNpc(46396)
+s_cmd.SelectTalk(0)	
+s_cmd.SprintTo(46124, 64553, 1079104)	
+s_cmd.SprintTo(47880, 65032, 1079168)	
+s_cmd.FinishQuest(45015,14256)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("天青石")
+s_cmd.SprintTo(47170, 65270, 1079168)		
+s_cmd.InteractNpc(46398)	
+s_cmd.SelectTalk(0)	
+s_cmd.SprintTo(47880, 65032, 1079168)	
+s_cmd.FinishQuest(45015,14249)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("查榜")
+s_cmd.SprintTo(45735, 65299, 1079168)		
+s_cmd.Wait(100)
+s_cmd.InteractNpc(46426)	
+s_cmd.SelectTalk(0)	
+s_cmd.SelectTalk(0)
+s_cmd.Wait(100)
+s_cmd.CheckExpr(s_util.QuestIsFinish(14264), "查榜完成")	
+s_cmd.Wait(100)
+s_cmd.SprintTo(45927, 64961, 1079168)		
+s_cmd.Wait(100)
+s_cmd.Goto("查榜")
+s_cmd.Tag("查榜完成")
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14264)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("蜜蜂")
+s_cmd.SprintTo(50077, 64984, 1078144)		
+s_cmd.Tag("蜜蜂循环")
+s_cmd.SprintTo(50072, 68678, 1079232)	
+s_cmd.FightEx(1, 45044, 4)	
+s_cmd.InteractDoodad(5067,4)	
+s_cmd.InteractDoodad(5475,4)	
+s_cmd.CheckExpr(s_util.QuestIsFinish(14668), "蜜蜂完成")	
+s_cmd.Goto("蜜蜂循环")
+s_cmd.Tag("蜜蜂完成")
+s_cmd.SprintTo(50072, 68678, 1079232)	
+s_cmd.SprintTo(50077, 64984, 1078144)	
+s_cmd.SprintTo(47880, 65032, 1079168)	
+s_cmd.FinishQuest(45015,14668)
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("小混混")
+s_cmd.SprintTo(48988, 65521, 1079168)		
+s_cmd.Tag("小混混循环")
+s_cmd.SprintTo(49067, 65992, 1079104)		
+s_cmd.Fight(1, 46347, 4)
+s_cmd.Fight(1, 45071, 4)
+s_cmd.CheckExpr(s_util.QuestIsFinish(14262), "小混混完成")	
+s_cmd.Goto("小混混循环")
+s_cmd.Tag("小混混完成")
+s_cmd.SprintTo(49067, 65992, 1079104)		
+s_cmd.SprintTo(48988, 65521, 1079168)		
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14262)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("诗")
+s_cmd.SprintTo(47865, 64908, 1079104)		
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.InteractNpc(45015)	
+s_cmd.SelectTalk(0)	--诗1
+s_cmd.SelectTalk(0)	--诗2
+s_cmd.SelectTalk(0)	--诗3
+s_cmd.Wait(100)
+s_cmd.CheckExpr(s_util.QuestIsFinish(14265), "诗完成")	
+s_cmd.Wait(100)
+s_cmd.Goto("诗")
+s_cmd.Tag("诗完成")
+s_cmd.SprintTo(47865, 64908, 1079104)	
+s_cmd.Wait(500)
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14265)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("棋")
+s_cmd.SprintTo(48241, 64403, 1079232)		
+s_cmd.InteractNpc(47865)	
+s_cmd.SelectTalk(0)	--棋1
+s_cmd.Wait(500)
+s_cmd.SelectTalk(0)	--棋2
+s_cmd.Wait(500)
+s_cmd.SelectTalk(14)	--棋3
+s_cmd.Wait(500)
+s_cmd.SelectTalk(21)	--棋4
+s_cmd.Wait(500)
+s_cmd.SprintTo(47880, 65032, 1079168)
+s_cmd.FinishQuest(45015,14786)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("柴")
+s_cmd.SprintTo(41797, 64876, 1079616)		
+s_cmd.SprintTo(31776, 53981, 1081280)		
+s_cmd.Tag("柴循环")
+s_cmd.SprintTo(31412, 53889, 1081344)		
+s_cmd.InteractDoodad(5474,6)	
+s_cmd.SprintTo(31412, 53889, 1081344)		
+s_cmd.InteractDoodad(5474,6)	--
+s_cmd.CheckExpr(s_util.QuestIsFinish(14667), "柴完成")
+s_cmd.Goto("柴循环")
+s_cmd.Tag("柴完成")
+s_cmd.SprintTo(31776, 53981, 1081280)		
+s_cmd.SprintTo(41797, 64876, 1079616)		
+s_cmd.SprintTo(47889, 65186, 1079232)		
+s_cmd.FinishQuest(45015,14667)
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("猫")
+s_cmd.SprintTo(49249, 65246, 1078912)	
+s_cmd.SprintTo(48759, 69344, 1081536)	
+s_cmd.SprintTo(47570, 74673, 1082496)	
+s_cmd.Tag("猫循环")
+s_cmd.SprintTo(47570, 74673, 1082496)	
+s_cmd.FightEx(1, 45043, 6)--6尺内打猫
+s_cmd.CheckExpr(s_util.QuestIsFinish(14270), "猫完成")	
+s_cmd.Goto("猫循环")
+s_cmd.Tag("猫完成")
+s_cmd.SprintTo(47570, 74673, 1082496)		
+s_cmd.SprintTo(48759, 69344, 1081536)		
+s_cmd.SprintTo(49249, 65246, 1078912)		
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14270)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("流民")
+s_cmd.MoveTo(52088, 64615, 1077440)		
+s_cmd.MoveTo(51846, 62126, 1077824)		
+s_cmd.MoveTo(49405, 61784, 1079040)	
+s_cmd.MoveTo(49396, 61314, 1079232)		
+s_cmd.Tag("流民循环")
+s_cmd.InteractNpc(46406)	
+s_cmd.SelectTalk(0)	--1
+s_cmd.SelectTalk(0)	--1
+s_cmd.CheckExpr(s_util.QuestIsFinish(14268), "流民完成")	
+s_cmd.Goto("流民循环")
+s_cmd.Tag("流民完成")
+s_cmd.SprintTo(49396, 61314, 1079232)		
+s_cmd.SprintTo(49405, 61784, 1079040)		
+s_cmd.SprintTo(51846, 62126, 1077824)		
+s_cmd.SprintTo(52088, 64615, 1077440)		
+s_cmd.SprintTo(47857, 65156, 1079232)		
+s_cmd.FinishQuest(45015,14268)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("白术")
+s_cmd.SprintTo(46124, 64553, 1079104)		
+s_cmd.SprintTo(46140, 64232, 1079168)		
+s_cmd.InteractNpc(46395)	
+s_cmd.SelectTalk(0)	
+s_cmd.SprintTo(46124, 64553, 1079104)		
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14254)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("烟雨")
+s_cmd.SprintTo(47170, 65270, 1079168)		
+s_cmd.InteractNpc(46398)	
+s_cmd.SelectTalk(0)	
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14250)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("古香")
+s_cmd.SprintTo(46124, 64553, 1079104)		
+s_cmd.SprintTo(46140, 64232, 1079168)		
+s_cmd.InteractNpc(46396)	
+s_cmd.SelectTalk(0)	
+s_cmd.SprintTo(46124, 64553, 1079104)		
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14257)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("五花肉")
+s_cmd.SprintTo(45735, 65299, 1079168)		
+s_cmd.InteractNpc(46426)	
+s_cmd.SelectTalk(0)	
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14252)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("打水")
+s_cmd.SprintTo(49343, 65102, 1078848)		
+s_cmd.SprintTo(57566, 70187, 1076513)		
+s_cmd.Tag("打水循环")
+s_cmd.SprintTo(57566, 70187, 1076513)		
+s_cmd.UseItem(5,23981)
+s_cmd.CheckExpr(s_util.QuestIsFinish(14671), "打水完成")	
+s_cmd.Goto("打水循环")
+s_cmd.Tag("打水完成")
+s_cmd.SprintTo(57566, 70187, 1076513)		
+s_cmd.SprintTo(49343, 65102, 1078848)		
+s_cmd.SprintTo(47880, 65032, 1079168)		
+s_cmd.FinishQuest(45015,14671)	
+s_cmd.Goto("接茶馆小童任务")
+-------------------------------------------------------------------
+s_cmd.Tag("肉块")
+s_cmd.SprintTo(49046, 65565, 1079104)	
+s_cmd.SprintTo(48079, 68221, 1081024)	
+s_cmd.SprintTo(45440, 70192, 1081472)	
+s_cmd.SprintTo(45330, 70762, 1082368)
+s_cmd.Tag("狼循环")
+s_cmd.CheckExpr(s_util.QuestIsFinish(14670), "狼完成")	
+s_cmd.SprintTo(45330, 70762, 1082368)		
+s_cmd.InteractDoodad(23982,5)  --捡肉块  这里建议打开懒人插件的自动拾取 以防万一 
+s_cmd.FightEx(1, 43217, 8)  --打狼 设置范围8尺 防止怪跑的慢在各个点拉着跑来跑去
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.CheckExpr(s_util.QuestIsFinish(14670), "狼完成")	 --每去 一个点判定一次是否完成任务 以免完成任务后依旧白跑路
+s_cmd.SprintTo(44986, 73651, 1081152)	
+s_cmd.InteractDoodad(23982,5)	
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.CheckExpr(s_util.QuestIsFinish(14670), "狼完成")	
+s_cmd.SprintTo(42949, 73835, 1081152)	
+s_cmd.InteractDoodad(23982,5)	
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 0)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.CheckExpr(s_util.QuestIsFinish(14670), "狼完成")	
+s_cmd.SprintTo(42661, 71870, 1080960)	
+s_cmd.InteractDoodad(23982,5)	
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 0)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.InteractDoodad(23982,5)
+s_cmd.CheckExpr(s_util.QuestIsFinish(14670), "狼完成")	
+s_cmd.SprintTo(45289, 71889, 1082816)
+s_cmd.Goto("狼循环")
+s_cmd.Tag("狼完成")	
+s_cmd.SprintTo(45289, 71889, 1082816)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.FightEx(1, 43217, 8)
+s_cmd.SprintTo(48079, 68221, 1081024)
+s_cmd.SprintTo(49046, 65565, 1079104)	
+s_cmd.SprintTo(47880, 65032, 1079168)			
+s_cmd.FinishQuest(45015,14670)	
+s_cmd.Goto("接茶馆小童任务")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
