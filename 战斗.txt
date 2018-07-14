@@ -1,6 +1,5 @@
 s_cmd.Tag("战斗")
 --以下为攻击命令 进入战斗状态则使用函数2攻击10尺内NPC
-s_cmd.UpdateSkill()
-if GetClientPlayer().bFightState then s_cmd.FightEx(2, 1, 10) else s_cmd.Next() end
+if GetClientPlayer().bFightState then s_cmd.FightEx(2, 1, 30) else s_cmd.Next() end
 ----------------------------------------------------------------------------------
 s_cmd.Goto("战斗")
