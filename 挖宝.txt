@@ -1,0 +1,12 @@
+--在唐门问道坡挖，少数情况还是会被石头之类的卡住，有空再优化吧。出现可疑人物也没有判断。
+s_cmd.Ride(0)								--下马
+s_cmd.Tag("开始挖宝")
+s_cmd.CheckExpr(g_LocalPlayer.nCurrentThew < 40, "挖宝结束")		--如果体力小于40点，结束
+s_cmd.FindTreasure()							--开启并寻找
+s_cmd.WaitFor(-1, g_LocalPlayer.nMoveState == MOVE_STATE.ON_STAND)	--等角色停止移动
+s_cmd.SitDown(s_util.GetItemCD(5, 6604, true) <= 0)			--等觅宝铲CD，顺便回气
+s_cmd.DigTreasure()							--挖
+s_cmd.WaitFor(8000, s_util.GetDoodad(1))				--等宝箱出现
+s_cmd.InteractDoodad(1)							--交互宝箱
+s_cmd.Goto("开始挖宝")
+s_cmd.Tag("挖宝结束")
