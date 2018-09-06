@@ -1,0 +1,159 @@
+--明教大轻功使用前最好先调整面向对准目标点，确保路线固定
+--明教大轻功函数CatFlyTo (x, y, z, h, pass)
+--参数：目的地X坐标,目的地Y坐标,目的地Z坐标,飞行高度Z坐标(缺省为Z坐标+10000),是否为路径点(用于调整路线规避障碍，经过时不会下降高度)
+--返回：到达目的地坐标后返回true
+--脚本用法示例：
+--大轻功到39323, 11994, 1110976，Z坐标到达1144720后平飞，到达目的地后下降：
+--s_cmd.WaitFor(-1, CatFlyTo(39323, 11994, 1110976 , 1144720)) 
+--飞行前往39323, 11994, 1110976 Z坐标到达1144720后平飞，到达目的地后不下降执行下一行：
+--s_cmd.WaitFor(-1, CatFlyTo(39323, 11994, 1110976 , 1144720, true))
+--大轻功到39323, 11994, 1110976，Z坐标到达1110976+10000后平飞，到达目的地后下降：
+--s_cmd.WaitFor(-1, CatFlyTo(39323, 11994, 1110976 )) 
+--飞行前往39323, 11994, 1110976，Z坐标到达1110976+10000后平飞，到达目的地后不下降执行下一行：
+--s_cmd.WaitFor(-1, CatFlyTo(39323, 11994, 1110976, true))
+
+------------------------------------------------------------------------------
+--根据地图判断周六还是周日前置
+if GetClientPlayer().GetMapID() == 22 then s_cmd.Goto("周六") end s_cmd.Next()
+if GetClientPlayer().GetMapID() == 30 then s_cmd.Goto("周日") end s_cmd.Goto("结束")
+s_cmd.Tag("周六")
+MoveForwardStart() s_cmd.Wait(1000)
+MoveForwardStop() s_cmd.Next()
+s_cmd.WaitFor(1000, s_util.TurnTo(39323, 11994, 1110976))		--等待1S调整面向
+s_cmd.WaitFor(-1, CatFlyTo(39323, 11994, 1110976 , 1204720))	--等待直到大轻功到达目的地后执行下一行
+s_cmd.AcceptAllQuest(7606)                  --接受NPC所有任务
+s_cmd.Goto("战！深入虎穴")
+s_cmd.Tag("周日") 
+s_cmd.Tag("交周六任务")
+s_cmd.WaitFor(-1, CatFlyTo(39323, 11994, 1110976 , 1204720))
+s_cmd.FinishQuest(7606, 7500)
+s_cmd.FinishQuest(7606, 7533)
+s_cmd.FinishQuest(7606, 7534)
+s_cmd.FinishQuest(7606, 7535)
+s_cmd.FinishQuest(7606, 7536)
+s_cmd.Goto("结束")
+s_cmd.Tag("交周日任务")
+s_cmd.Goto("结束")
+-------------------------------------------------------------------
+s_cmd.Tag("战！深入虎穴") --7535
+if not GetClientPlayer().IsInParty() then g_MacroVars.QianzhiTeam = 1 end s_cmd.Next() --组队深入虎穴
+s_cmd.WaitFor(1000, s_util.TurnTo(58688, 47633, 1081536))
+s_cmd.WaitFor(-1, CatFlyTo(58688, 47633, 1081536, 1204720))
+s_cmd.Tag("摸解药")
+if not GetClientPlayer().IsInParty() then g_MacroVars.QianzhiTeam = 1 end s_cmd.Next() --组队深入虎穴
+s_cmd.MoveTo(58004, 47579, 1081536)
+s_cmd.FightEx(1, 1327, 10)
+s_cmd.InteractDoodadEx(6864, 10, s_util.GetItemCount(5, 4541) > 4, "送药1")
+s_cmd.MoveTo(58913, 48063, 1081536)
+s_cmd.FightEx(1, 1327, 10)
+s_cmd.InteractDoodadEx(6864, 10, s_util.GetItemCount(5, 4541) > 4, "送药2")
+s_cmd.MoveTo(59785, 48017, 1081472)
+s_cmd.FightEx(1, 1327, 10)
+s_cmd.InteractDoodadEx(6864, 10, s_util.GetItemCount(5, 4541) > 4, "送药3")
+s_cmd.MoveTo(59911, 47083, 1081600)
+s_cmd.FightEx(1, 1327, 10)
+s_cmd.InteractDoodadEx(6864, 10, s_util.GetItemCount(5, 4541) > 4, "送药4")
+s_cmd.MoveTo(59009, 46911, 1081600)
+s_cmd.FightEx(1, 1327, 10)
+s_cmd.InteractDoodadEx(6864, 10, s_util.GetItemCount(5, 4541) > 4, "送药5")
+s_cmd.MoveTo(58330, 46986, 1081600)
+s_cmd.FightEx(1, 1327, 10)
+s_cmd.InteractDoodadEx(6864, 10, s_util.GetItemCount(5, 4541) > 4, "送药6")
+s_cmd.Goto("摸解药")
+s_cmd.Tag("送药1")
+s_cmd.MoveTo(58004, 47579, 1081536)
+if not s_util.QuestCheckState(7535, 1) then s_cmd.InteractNpc(1938) end s_cmd.Next()
+if DialoguePanel.IsOpened() then s_cmd.SelectTalk(0) end s_cmd.Next() --给村民服下解药
+s_cmd.Tag("送药2")
+s_cmd.MoveTo(58913, 48063, 1081536)
+if not s_util.QuestCheckState(7535, 1) then s_cmd.InteractNpc(1938) end s_cmd.Next()
+if DialoguePanel.IsOpened() then s_cmd.SelectTalk(0) end s_cmd.Next() --给村民服下解药
+s_cmd.Tag("送药3")
+s_cmd.MoveTo(59785, 48017, 1081472)
+if not s_util.QuestCheckState(7535, 1) then s_cmd.InteractNpc(1938) end s_cmd.Next()
+if DialoguePanel.IsOpened() then s_cmd.SelectTalk(0) end s_cmd.Next() --给村民服下解药
+s_cmd.Tag("送药4")
+s_cmd.MoveTo(59911, 47083, 1081600)
+if not s_util.QuestCheckState(7535, 1) then s_cmd.InteractNpc(1938) end s_cmd.Next()
+if DialoguePanel.IsOpened() then s_cmd.SelectTalk(0) end s_cmd.Next() --给村民服下解药
+s_cmd.Tag("送药5")
+s_cmd.MoveTo(59009, 46911, 1081600)
+if not s_util.QuestCheckState(7535, 1) then s_cmd.InteractNpc(1938) end s_cmd.Next()
+if DialoguePanel.IsOpened() then s_cmd.SelectTalk(0) end s_cmd.Next() --给村民服下解药
+s_cmd.Tag("送药6")
+s_cmd.MoveTo(58330, 46986, 1081600)
+if not s_util.QuestCheckState(7535, 1) then s_cmd.InteractNpc(1938) end s_cmd.Next()
+if DialoguePanel.IsOpened() then s_cmd.SelectTalk(0) end s_cmd.Next() --给村民服下解药
+if s_util.QuestCheckState(7535, 1) then s_cmd.Goto("救人") end s_cmd.Goto("送药1")
+s_cmd.Tag("救人")
+s_cmd.MoveTo(59288, 46353, 1081856)
+if not s_util.QuestIsFinish(7535) then s_cmd.InteractNpc(1976) end s_cmd.Next()--被抓住的村民
+if DialoguePanel.IsOpened() then s_cmd.SelectTalk(0) end s_cmd.Next()
+if DialoguePanel.IsOpened() then s_cmd.SelectTalk(0) end s_cmd.Next()
+s_cmd.CheckExpr(s_util.QuestIsFinish(7535), "战！四处出击")
+s_cmd.Goto("救人")
+-------------------------------------------------------------------
+s_cmd.Tag("战！四处出击") --7536
+g_MacroVars.QianzhiTeam = false s_cmd.Next() --退组
+s_cmd.MoveTo(58330, 46986, 1081600)
+if not GetClientPlayer().IsInParty() then g_MacroVars.QianzhiTeam = 2 end s_cmd.Next() --组队四处出击
+s_cmd.WaitFor(1000, s_util.TurnTo(80842, 72872, 1048320))
+s_cmd.WaitFor(-1, CatFlyTo(80842, 72872, 1048320, 1105712))
+s_cmd.MoveTo(81570, 74977, 1050112)
+s_cmd.Tag("摸草")
+if not GetClientPlayer().IsInParty() then g_MacroVars.QianzhiTeam = 2 end s_cmd.Next() --组队四处出击
+s_cmd.InteractDoodad(861)
+s_cmd.CheckExpr(s_util.QuestIsFinish(7536), "河里的沙石")
+s_cmd.Goto("摸草")
+-------------------------------------------------------------------
+s_cmd.Tag("河里的沙石") --7533
+g_MacroVars.QianzhiTeam = false s_cmd.Next() --退组
+s_cmd.WaitFor(1000, s_util.TurnTo(72321, 74081, 1047044))
+s_cmd.WaitFor(-1, CatFlyTo(72321, 74081, 1047044))
+Jump() s_cmd.Next() --跳跃出水
+Jump() s_cmd.Next()	--跳跃出水
+s_cmd.Tag("交互石头循环")
+s_cmd.SprintTo(72321, 74081, 1047044)
+s_cmd.InteractDoodad(843) --河底的沙石
+Jump() s_cmd.Next()	--跳跃出水
+s_cmd.CheckExpr(s_util.QuestIsFinish(7533), "止血草")
+s_cmd.SprintTo(71442, 75054, 1047044)
+s_cmd.InteractDoodad(843) --河底的沙石
+Jump() s_cmd.Next()	--跳跃出水
+s_cmd.CheckExpr(s_util.QuestIsFinish(7533), "止血草")
+s_cmd.SprintTo(70538, 76162, 1047044)
+s_cmd.InteractDoodad(843) --河底的沙石
+Jump() s_cmd.Next()	--跳跃出水
+s_cmd.CheckExpr(s_util.QuestIsFinish(7533), "止血草")
+s_cmd.SprintTo(70774, 73285, 1046800)
+s_cmd.InteractDoodad(843) --河底的沙石
+Jump() s_cmd.Next()	--跳跃出水
+s_cmd.CheckExpr(s_util.QuestIsFinish(7533), "止血草")
+s_cmd.Goto("交互石头循环")
+-------------------------------------------------------------------
+s_cmd.Tag("止血草") --7534
+s_cmd.CheckExpr(s_util.QuestIsFinish(7534), "赵新宇") --先判断摸草是否摸全
+s_cmd.WaitFor(1000, s_util.TurnTo(57323, 54793, 1048064))
+s_cmd.WaitFor(-1, CatFlyTo(57323, 54793, 1048064, 1068064))
+s_cmd.Tag("止血草循环")
+s_cmd.InteractDoodad(861) --止血草
+s_cmd.CheckExpr(s_util.QuestIsFinish(7534), "赵新宇")
+s_cmd.Goto("止血草循环")
+-------------------------------------------------------------------
+s_cmd.Tag("赵新宇") --7500
+s_cmd.WaitFor(1000, s_util.TurnTo(34449, 59376, 1056448))
+s_cmd.WaitFor(-1, CatFlyTo(34449, 59376, 1056448, 1086448))
+s_cmd.Tag("隐身等待赵新宇") 
+s_cmd.MoveTo(34575, 60020, 1056512)
+if GetClientPlayer().nMoveState == 3 and s_util.GetBuffInfo(GetClientPlayer())[4052] then s_cmd.CancelBuff(4052) end s_cmd.Next()
+s_cmd.InteractDoodadEx(3443, 30)
+if not s_util.GetBuffInfo(GetClientPlayer())[4052] then s_cmd.UseSkill(3974) end s_cmd.Next()
+s_cmd.CheckExpr(s_util.QuestIsFinish(7500), "摸笛子")
+s_cmd.Goto("隐身等待赵新宇") 
+s_cmd.Tag("摸笛子")
+s_cmd.MoveTo(34607, 59868, 1056512)
+s_cmd.WaitFor(1000, s_util.TurnTo(39323, 11994, 1110976))
+s_cmd.UseSkill(3974) --隐身脱战
+s_cmd.Goto("交周六任务")
+----------------------------------------------------------------
+s_cmd.Tag("结束")
